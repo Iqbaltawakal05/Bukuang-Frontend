@@ -61,6 +61,7 @@ export const Register: React.FC = () => {
               <input
                 type="text"
                 required
+                autoComplete="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Nama Anda"
@@ -76,6 +77,7 @@ export const Register: React.FC = () => {
               <input
                 type="email"
                 required
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="nama@email.com"
@@ -91,6 +93,7 @@ export const Register: React.FC = () => {
               <input
                 type="password"
                 required
+                autoComplete="new-password"
                 minLength={8}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -107,6 +110,7 @@ export const Register: React.FC = () => {
               <input
                 type="password"
                 required
+                autoComplete="new-password"
                 value={passwordConfirmation}
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
                 placeholder="Ketik ulang password"

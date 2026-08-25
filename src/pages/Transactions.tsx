@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { ConfirmModal } from '../components/ConfirmModal';
 import {
   Plus,
   Search,
@@ -141,10 +142,13 @@ export const Transactions: React.FC = () => {
     }
   };
 
-  const handleDelete = async (id: number) => {
-    if (!window.confirm('Apakah Anda yakin ingin menghapus transaksi ini?')) return;
+  const [deleteId, setDeleteId] = useState<number | null>(null);
+
+  const confirmDelete = async () => {
+    if (!deleteId) return;
     try {
-      await api.delete(`/transactions/${id}`);
+      await api.delete(`/transactions/${deleteId}`);
+      setDeleteId(null);
       fetchTransactions();
     } catch (err: any) {
       alert(err.response?.data?.message || 'Gagal menghapus transaksi');
@@ -293,7 +297,7 @@ export const Transactions: React.FC = () => {
                             <Edit2 className="w-4 h-4" />
                           </button>
                           <button
-                            onClick={() => handleDelete(tx.id)}
+                            onClick={() => setDeleteId(tx.id)}
                             className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
                             title="Hapus"
                           >
@@ -444,6 +448,16 @@ export const Transactions: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* Custom Confirmation Modal */}
+      <ConfirmModal
+        isOpen={deleteId !== null}
+        title="Hapus Transaksi"
+        message="Apakah Anda yakin ingin menghapus data transaksi ini secara permanen?"
+        confirmText="Ya, Hapus Transaksi"
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteId(null)}
+      />
     </div>
   );
 };
