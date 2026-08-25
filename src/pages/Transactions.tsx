@@ -104,7 +104,8 @@ export const Transactions: React.FC = () => {
   const handleOpenEdit = (tx: TransactionItem) => {
     setEditingItem(tx);
     setFormType(tx.type);
-    setFormCategory(tx.category_id.toString());
+    const catId = tx.category_id || tx.category?.id || (categories[0]?.id ?? '');
+    setFormCategory(catId.toString());
     setFormAmount(tx.amount.toString());
     setFormDate(tx.transaction_date);
     setFormDesc(tx.description || '');

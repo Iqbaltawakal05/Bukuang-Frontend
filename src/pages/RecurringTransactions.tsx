@@ -81,7 +81,8 @@ export const RecurringTransactions: React.FC = () => {
   const handleOpenEdit = (item: RecurringItem) => {
     setEditingItem(item);
     setFormType(item.type);
-    setFormCategory(item.category_id.toString());
+    const catId = item.category_id || item.category?.id || (categories[0]?.id ?? '');
+    setFormCategory(catId.toString());
     setFormAmount(item.amount.toString());
     setFormFrequency(item.frequency);
     setFormStartDate(item.start_date);

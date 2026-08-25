@@ -75,7 +75,8 @@ export const Budgets: React.FC = () => {
 
   const handleOpenEdit = (b: BudgetItem) => {
     setEditingItem(b);
-    setFormCategory(b.category_id.toString());
+    const catId = b.category_id || b.category?.id || (categories[0]?.id ?? '');
+    setFormCategory(catId.toString());
     setFormAmount(b.amount.toString());
     setShowModal(true);
   };
