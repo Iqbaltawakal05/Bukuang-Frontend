@@ -54,21 +54,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string) => {
     const response = await api.post('/auth/login', { email, password });
-    const { token: newToken, user: newUser } = response.data.data;
+    const { access_token, user: newUser } = response.data.data;
+    const tokenToSave = access_token || response.data.data.token;
     
-    setToken(newToken);
+    setToken(tokenToSave);
     setUser(newUser);
-    localStorage.setItem('bukuang_token', newToken);
+    localStorage.setItem('bukuang_token', tokenToSave);
     localStorage.setItem('bukuang_user', JSON.stringify(newUser));
   };
 
   const register = async (name: string, email: string, password: string, password_confirmation: string) => {
     const response = await api.post('/auth/register', { name, email, password, password_confirmation });
-    const { token: newToken, user: newUser } = response.data.data;
+    const { access_token, user: newUser } = response.data.data;
+    const tokenToSave = access_token || response.data.data.token;
 
-    setToken(newToken);
+    setToken(tokenToSave);
     setUser(newUser);
-    localStorage.setItem('bukuang_token', newToken);
+    localStorage.setItem('bukuang_token', tokenToSave);
     localStorage.setItem('bukuang_user', JSON.stringify(newUser));
   };
 
@@ -127,3 +129,4 @@ export const useAuth = () => {
   }
   return context;
 };
+
