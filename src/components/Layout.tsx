@@ -30,13 +30,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const navItems = [
     { label: 'Dashboard', path: '/', icon: LayoutDashboard },
-    { label: 'Transactions', path: '/transactions', icon: Receipt },
-    { label: 'Categories', path: '/categories', icon: Tags },
-    { label: 'Budgets', path: '/budgets', icon: PieChart },
-    { label: 'Financial Goals', path: '/financial-goals', icon: Target },
-    { label: 'Recurring Schedules', path: '/recurring-transactions', icon: Repeat },
-    { label: 'Reports & Export', path: '/reports', icon: FileSpreadsheet },
-    { label: 'Profile', path: '/profile', icon: User },
+    { label: 'Transaksi', path: '/transactions', icon: Receipt },
+    { label: 'Kategori', path: '/categories', icon: Tags },
+    { label: 'Anggaran (Budget)', path: '/budgets', icon: PieChart },
+    { label: 'Target Keuangan', path: '/financial-goals', icon: Target },
+    { label: 'Jadwal Berulang', path: '/recurring-transactions', icon: Repeat },
+    { label: 'Laporan & Ekspor', path: '/reports', icon: FileSpreadsheet },
+    { label: 'Profil Saya', path: '/profile', icon: User },
   ];
 
   return (
@@ -86,7 +86,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
           <button
             onClick={handleLogout}
-            title="Logout"
+            title="Keluar / Logout"
             className="p-2 text-slate-400 hover:text-rose-400 hover:bg-slate-800 rounded-lg transition-colors"
           >
             <LogOut className="w-5 h-5" />
@@ -98,14 +98,14 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="flex-1 ml-64 flex flex-col min-h-screen">
         <header className="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between sticky top-0 z-20 shadow-xs">
           <h1 className="text-lg font-semibold text-slate-800">
-            Personal Finance Management
+            Sistem Manajemen Keuangan
           </h1>
           <div className="flex items-center gap-4">
             <span className="text-xs font-medium px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full">
-              System Online
+              Sistem Aktif
             </span>
             <span className="text-sm text-slate-600 font-medium">
-              Hello, <strong className="text-slate-900">{user?.name}</strong> 👋
+              Halo, <strong className="text-slate-900">{user?.name}</strong> 👋
             </span>
           </div>
         </header>
