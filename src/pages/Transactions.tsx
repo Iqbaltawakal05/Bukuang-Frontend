@@ -45,6 +45,7 @@ export const Transactions: React.FC = () => {
   // Modal State
   const [showModal, setShowModal] = useState(false);
   const [editingItem, setEditingItem] = useState<TransactionItem | null>(null);
+  const [deleteId, setDeleteId] = useState<number | null>(null);
 
   // Form State
   const [formType, setFormType] = useState<'income' | 'expense'>('expense');
@@ -141,8 +142,6 @@ export const Transactions: React.FC = () => {
       setSubmitting(false);
     }
   };
-
-  const [deleteId, setDeleteId] = useState<number | null>(null);
 
   const confirmDelete = async () => {
     if (!deleteId) return;
