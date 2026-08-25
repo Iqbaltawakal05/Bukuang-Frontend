@@ -15,7 +15,7 @@ interface RecurringItem {
   category?: Category;
   type: 'income' | 'expense';
   amount: number;
-  frequency: 'daily' | 'weekly' | 'monthly' | 'yearly';
+  frequency: 'daily' | 'weekly' | 'monthly' | 'every_3_months' | 'every_6_months' | 'yearly';
   start_date: string;
   next_run_date: string;
   end_date: string | null;
@@ -34,7 +34,7 @@ export const RecurringTransactions: React.FC = () => {
   const [formType, setFormType] = useState<'income' | 'expense'>('expense');
   const [formCategory, setFormCategory] = useState('');
   const [formAmount, setFormAmount] = useState('');
-  const [formFrequency, setFormFrequency] = useState<'daily' | 'weekly' | 'monthly' | 'yearly'>('monthly');
+  const [formFrequency, setFormFrequency] = useState<'daily' | 'weekly' | 'monthly' | 'every_3_months' | 'every_6_months' | 'yearly'>('monthly');
   const [formStartDate, setFormStartDate] = useState(new Date().toISOString().split('T')[0]);
   const [formEndDate, setFormEndDate] = useState('');
   const [formDesc, setFormDesc] = useState('');
@@ -219,7 +219,13 @@ export const RecurringTransactions: React.FC = () => {
                           {item.category?.name || 'Kategori'}
                         </span>
                       </td>
-                      <td className="px-6 py-4 font-medium capitalize text-slate-700">{item.frequency}</td>
+                      <td className="px-6 py-4 font-medium capitalize text-slate-700">
+                        {item.frequency === 'every_6_months'
+                          ? 'Semesteran (6 Bulan)'
+                          : item.frequency === 'every_3_months'
+                          ? 'Triwulan (3 Bulan)'
+                          : item.frequency}
+                      </td>
                       <td className="px-6 py-4 font-medium text-slate-600">{item.next_run_date}</td>
                       <td
                         className={`px-6 py-4 text-right font-bold ${
@@ -342,11 +348,13 @@ export const RecurringTransactions: React.FC = () => {
                 <select
                   value={formFrequency}
                   onChange={(e) => setFormFrequency(e.target.value as any)}
-                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 capitalize"
+                  className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 >
                   <option value="daily">Harian (Daily)</option>
                   <option value="weekly">Mingguan (Weekly)</option>
                   <option value="monthly">Bulanan (Monthly)</option>
+                  <option value="every_3_months">Triwulan (3 Bulan Sekali)</option>
+                  <option value="every_6_months">Semesteran / 6 Bulan Sekali (Bayar UKT/Kuliah)</option>
                   <option value="yearly">Tahunan (Yearly)</option>
                 </select>
               </div>
