@@ -20,7 +20,12 @@ export const Login: React.FC = () => {
       await login(email, password);
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Login gagal. Periksa kembali email dan password Anda.');
+      const msg =
+        err.response?.data?.errors?.email?.[0] ||
+        err.response?.data?.errors?.password?.[0] ||
+        err.response?.data?.message ||
+        'Login gagal. Periksa kembali email dan password Anda.';
+      setError(msg);
     } finally {
       setLoading(false);
     }

@@ -133,13 +133,13 @@ export const Budgets: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Alokasi Budget Bulanan</h2>
-          <p className="text-slate-500 text-sm">Batasi dan kendalikan pengeluaran bulanan per kategori</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Alokasi Budget Bulanan</h2>
+          <p className="text-slate-500 text-xs sm:text-sm">Batasi dan kendalikan pengeluaran bulanan per kategori</p>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-3">
           {/* Month Selector */}
           <div className="flex items-center bg-white border border-slate-200 rounded-xl px-3 py-1.5 shadow-xs gap-3">
             <button

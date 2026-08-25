@@ -85,7 +85,7 @@ export const Dashboard: React.FC = () => {
       setSummary(summaryRes.data.data);
       setCharts(chartsRes.data.data);
     } catch (err) {
-      console.error('Failed to load dashboard data', err);
+      console.error('Gagal memuat data dasbor', err);
     } finally {
       setLoading(false);
     }
@@ -152,32 +152,32 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Page Title */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Dashboard Keuangan</h2>
-          <p className="text-slate-500 text-sm">Ringkasan kondisi dan analisis keuangan Anda</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Dashboard Keuangan</h2>
+          <p className="text-slate-500 text-xs sm:text-sm">Ringkasan kondisi dan analisis keuangan Anda</p>
         </div>
         <button
           onClick={fetchDashboardData}
-          className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-sm font-medium shadow-xs transition-all"
+          className="self-start sm:self-auto flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-sm font-medium shadow-xs transition-all"
         >
           <RefreshCw className="w-4 h-4 text-slate-500" />
-          Refresh
+          Segarkan Data
         </button>
       </div>
 
       {/* Top 4 Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* Card 1: Total Balance */}
         <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs relative overflow-hidden">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-xs font-semibold text-slate-500 tracking-wider uppercase">Total Balance</span>
+            <span className="text-xs font-semibold text-slate-500 tracking-wider uppercase">Total Saldo Bersih</span>
             <div className="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center shadow-md">
               <Wallet className="w-5 h-5" />
             </div>
           </div>
           <p className="text-2xl font-extrabold text-slate-900">{formatIDR(summary?.total_balance || 0)}</p>
-          <p className="text-xs text-slate-500 mt-2">Saldo kumulatif bersih</p>
+          <p className="text-xs text-slate-500 mt-2">Saldo uang aktif saat ini</p>
         </div>
 
         {/* Card 2: Monthly Income */}
@@ -260,14 +260,18 @@ export const Dashboard: React.FC = () => {
           {/* Budget Overview Widget */}
           <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-base font-bold text-slate-900">Status Budget Bulanan</h3>
+              <h3 className="text-base font-bold text-slate-900">Status Anggaran Bulanan</h3>
               {summary?.budget_usage_summary.percentage! >= 100 ? (
                 <span className="px-2.5 py-1 bg-rose-100 text-rose-700 font-bold text-xs rounded-full flex items-center gap-1">
-                  <AlertTriangle className="w-3.5 h-3.5" /> EXCEEDED
+                  <AlertTriangle className="w-3.5 h-3.5" /> MELEBIHI LIMIT
+                </span>
+              ) : summary?.budget_usage_summary.percentage! >= 80 ? (
+                <span className="px-2.5 py-1 bg-amber-100 text-amber-700 font-bold text-xs rounded-full flex items-center gap-1">
+                  <AlertTriangle className="w-3.5 h-3.5" /> SIAGA / WARNING
                 </span>
               ) : (
                 <span className="px-2.5 py-1 bg-emerald-100 text-emerald-700 font-bold text-xs rounded-full">
-                  NORMAL
+                  AMAN / NORMAL
                 </span>
               )}
             </div>
@@ -291,7 +295,7 @@ export const Dashboard: React.FC = () => {
                 />
               </div>
               <p className="text-xs text-slate-500 pt-1">
-                Sisa Anggaran: <strong className="text-slate-900">{formatIDR(summary?.budget_usage_summary.remaining || 0)}</strong>
+                Sisa Anggaran Belanja: <strong className="text-slate-900">{formatIDR(summary?.budget_usage_summary.remaining || 0)}</strong>
               </p>
             </div>
           </div>
@@ -325,11 +329,11 @@ export const Dashboard: React.FC = () => {
                     <td className="px-6 py-4">
                       {tx.type === 'income' ? (
                         <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full border border-emerald-200">
-                          <ArrowUpRight className="w-3.5 h-3.5" /> Income
+                          <ArrowUpRight className="w-3.5 h-3.5" /> Pemasukan
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full border border-rose-200">
-                          <ArrowDownRight className="w-3.5 h-3.5" /> Expense
+                          <ArrowDownRight className="w-3.5 h-3.5" /> Pengeluaran
                         </span>
                       )}
                     </td>
@@ -338,7 +342,7 @@ export const Dashboard: React.FC = () => {
                         className="px-2.5 py-1 rounded-md text-xs font-semibold text-white shadow-2xs"
                         style={{ backgroundColor: tx.category?.color || '#059669' }}
                       >
-                        {tx.category?.name || 'Uncategorized'}
+                        {tx.category?.name || 'Tanpa Kategori'}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-slate-900 font-medium">{tx.description || '-'}</td>
@@ -365,4 +369,3 @@ export const Dashboard: React.FC = () => {
     </div>
   );
 };
-

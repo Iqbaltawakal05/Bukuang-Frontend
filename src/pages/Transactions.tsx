@@ -162,14 +162,14 @@ export const Transactions: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Manajemen Transaksi</h2>
-          <p className="text-slate-500 text-sm">Catat dan pantau seluruh pemasukan serta pengeluaran Anda</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Manajemen Transaksi</h2>
+          <p className="text-slate-500 text-xs sm:text-sm">Catat dan pantau seluruh pemasukan serta pengeluaran Anda</p>
         </div>
         <button
           onClick={handleOpenCreate}
-          className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl text-sm shadow-md transition-all"
+          className="self-start sm:self-auto flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl text-sm shadow-md transition-all"
         >
           <Plus className="w-5 h-5" />
           Tambah Transaksi Baru
@@ -177,7 +177,7 @@ export const Transactions: React.FC = () => {
       </div>
 
       {/* Toolbar Filters */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {/* Search */}
         <div className="relative">
           <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />

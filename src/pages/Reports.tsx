@@ -139,21 +139,21 @@ export const Reports: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Laporan Keuangan & Pusat Ekspor</h2>
-          <p className="text-slate-500 text-sm">Analisis laporan periode dan unduh berkas laporan (PDF, CSV, XLSX)</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Laporan Keuangan & Pusat Ekspor</h2>
+          <p className="text-slate-500 text-xs sm:text-sm">Analisis laporan periode dan unduh berkas laporan (PDF, CSV, XLSX)</p>
         </div>
       </div>
 
       {/* Period Filter Tabs */}
       <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-wrap items-center justify-between gap-4">
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {['daily', 'weekly', 'monthly', 'yearly', 'custom'].map((p) => (
             <button
               key={p}
               onClick={() => setPeriod(p)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all ${
+              className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all ${
                 period === p
                   ? 'bg-emerald-600 text-white shadow-md'
                   : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
@@ -165,14 +165,14 @@ export const Reports: React.FC = () => {
         </div>
 
         {period === 'custom' && (
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
               className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs"
             />
-            <span className="text-slate-400">s/d</span>
+            <span className="text-slate-400 text-xs">s/d</span>
             <input
               type="date"
               value={endDate}
@@ -196,7 +196,7 @@ export const Reports: React.FC = () => {
           <span>Mengkalkulasi laporan...</span>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs">
             <span className="text-xs text-slate-500 font-semibold uppercase">Total Pemasukan</span>
             <p className="text-xl font-extrabold text-emerald-600 mt-1">{formatIDR(report?.total_income || 0)}</p>

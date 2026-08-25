@@ -159,14 +159,14 @@ export const RecurringTransactions: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900">Jadwal Transaksi Berulang</h2>
-          <p className="text-slate-500 text-sm">Otomatisasi pemrosesan transaksi berulang (Gaji, Langganan, Tagihan)</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900">Jadwal Transaksi Berulang</h2>
+          <p className="text-slate-500 text-xs sm:text-sm">Otomatisasi pemrosesan transaksi berulang (Gaji, Langganan, Tagihan)</p>
         </div>
         <button
           onClick={handleOpenCreate}
-          className="flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl text-sm shadow-md transition-all"
+          className="self-start sm:self-auto flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-xl text-sm shadow-md transition-all"
         >
           <Plus className="w-5 h-5" />
           Buat Jadwal Baru
